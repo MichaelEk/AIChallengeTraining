@@ -125,6 +125,8 @@ namespace Ants {
 					}
 				}
 			}
+
+            state.SetUnVisible();
 		}
 
 		private void FinishTurn () {

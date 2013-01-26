@@ -266,6 +266,24 @@ namespace Ants {
 			return false;
 		}
 
+	    public string GetVisualMap()
+	    {
+	        string s = "";
+            for(int r = 0; r < Height; r++)
+            {
+                for(int c = 0; c < Width; c++)
+                {
+                    s += (char)map[r, c];
+                }
+                s += "\n";
+            }
+	        return s;
+	    }
+
+        public void SetUnVisible()
+        {
+            int a = 1 + 1;
+        }
 	}
 }
 

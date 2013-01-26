@@ -124,5 +124,9 @@ namespace Ants {
 		ICollection<Direction> GetDirections (Location loc1, Location loc2);
 		
 		bool GetIsVisible(Location loc);
+
+	    string GetVisualMap();
+
+	    void SetUnVisible();
 	}
 }

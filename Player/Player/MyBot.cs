@@ -1,32 +1,35 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
-namespace Ants {
+namespace Ants 
+{
 
-	class MyBot : Bot {
+	class MyBot : Bot 
+    {
+        Random _random = new Random();
+	    private Direction[] _directions = Ants.Aim.Keys.ToArray();
 
-		// DoTurn is run once per turn
-		public override void DoTurn (IGameState state) {
+		public override void DoTurn (IGameState state)
+		{
+		    var usedMoves = new HashSet<Location>();
 
-			// loop through all my ants and try to give them orders
-			foreach (Ant ant in state.MyAnts) {
+			foreach (Ant ant in state.MyAnts) 
+            {
+                for (int i = 0; i < 4; i++ )
+                {
+                    var direction = _directions[_random.Next(4)];
+
+                    Location newLoc = state.GetDestination(ant, direction);
+
+                    if (state.GetIsPassable(newLoc) && !usedMoves.Contains(newLoc))
+                    {
+                        usedMoves.Add(newLoc);
+                        IssueOrder(ant, direction);
+                        break;
+                    }
+                }
 				
-				// try all the directions
-				foreach (Direction direction in Ants.Aim.Keys) {
-
-					// GetDestination will wrap around the map properly
-					// and give us a new location
-					Location newLoc = state.GetDestination(ant, direction);
-
-					// GetIsPassable returns true if the location is land
-					if (state.GetIsPassable(newLoc)) {
-						IssueOrder(ant, direction);
-						// stop now, don't give 1 and multiple orders
-						break;
-					}
-				}
-				
-				// check if we have time left to calculate more orders
 				if (state.TimeRemaining < 10) break;
 			}
 			
