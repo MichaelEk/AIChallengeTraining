@@ -153,7 +153,8 @@ namespace Ants {
 		/// <returns><c>true</c> if the location is not water, <c>false</c> otherwise.</returns>
 		/// <seealso cref="GetIsUnoccupied"/>
 		public bool GetIsPassable (Location location) {
-			return map[location.Row, location.Col] != Tile.Water;
+            return map[location.Row, location.Col] != Tile.Water && map[location.Row, location.Col] != Tile.Ant;
+
 		}
 		
 		/// <summary>

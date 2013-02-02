@@ -28,6 +28,7 @@ namespace Ants
                         IssueOrder(ant, direction);
                         break;
                     }
+                    
                 }
 				
 				if (state.TimeRemaining < 10) break;
